@@ -16,6 +16,7 @@ import javax.swing.table.JTableHeader;
 
 import cart.CourseCart;
 import course.CourseData;
+import event.ComboBoxSelection;
 import event.DoubleClickCourseListHeader;
 import sort.Sort;
 import sort.SortCourseName;
@@ -69,6 +70,10 @@ public class Main extends JFrame {
 		
 		JComboBox selectDepartmentCombobox = new JComboBox();
 		selectDepartmentCombobox.setBounds(349, 40, 104, 27);
+		String[] departmentList = {"개설학과", "컴퓨터공학부", "HRD학과", "교양학부", "기계공학부", "메카트로닉스공학부","에너지신소재화학공학부", 
+				"전기ㆍ전자ㆍ통신공학부", "산업경영학부", "메카트로닉스공학부", "디자인ㆍ건축공학부", "융합학과"};
+//		String[] departmentList = {"개설학과", "컴공", "디공,건축", "기계", "전전통", "에신화", "산경", "메카", "교양학부", "HRD학과", "융합"};
+		for(var department : departmentList) selectDepartmentCombobox.addItem(department);
 		getContentPane().add(selectDepartmentCombobox);
 		
 		searchQueueTextfield = new JTextField();
@@ -128,6 +133,10 @@ public class Main extends JFrame {
 
 		JTableHeader courseCartHeader = courseCart.getTableHeader();
 		courseCartHeader.addMouseListener(new DoubleClickCourseListHeader(courseCart, viewCourseCart));
+		
+		selectDepartmentCombobox.addItemListener(new ComboBoxSelection(viewCourseList));
+		
+		
 		actionTest();
 	}
 	
