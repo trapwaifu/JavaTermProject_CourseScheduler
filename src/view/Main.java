@@ -12,9 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.JTableHeader;
 
 import cart.CourseCart;
 import course.CourseData;
+import event.DoubleClickCourseListHeader;
 import sort.Sort;
 import sort.SortCourseName;
 import trim.Filter;
@@ -26,7 +28,9 @@ public class Main extends JFrame {
 	private JTable courseCart;
 	private JTextField searchQueueTextfield;
 	
-	private Map<Integer, JLabel> scheduleImageMap = new HashMap<>();
+	private Map<Integer, JLabel> viewScheduleImageMap = new HashMap<>();
+	private ViewCourseListGUI viewCourseList = null;
+	private ViewCourseCartGUI viewCourseCart = null;
 	
 	Main() {
 		setTitle("Test");
@@ -100,7 +104,7 @@ public class Main extends JFrame {
 				int key = j * 100 + i - 1;
 				JLabel label = new JLabel(Integer.toString(key));
 				label.setOpaque(true);
-				scheduleImageMap.put(key, label);
+				viewScheduleImageMap.put(key, label);
 				panel.add(label);
 			}
 		}
@@ -108,6 +112,13 @@ public class Main extends JFrame {
 		
 		setVisible(true);
 		
+		
+		viewCourseList = new ViewCourseListGUI(courseList);
+		viewCourseCart = new ViewCourseCartGUI(courseCart);
+
+		JTableHeader courseListHeader = courseList.getTableHeader();
+		courseListHeader.addMouseListener(new DoubleClickCourseListHeader(courseList, viewCourseList));
+
 		actionTest();
 	}
 	
@@ -116,20 +127,6 @@ public class Main extends JFrame {
 	}
 	
 	private void actionTest() {
-		// later separate this to a init function
-		View viewCourseList = new ViewCourseListGUI(courseList);
-		viewCourseList.view();
-		View viewCourseCart = new ViewCourseCartGUI(courseCart);
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		Filter filter = new FilterDepartment();
 		Search search = new Search();
 		Sort sort = new SortCourseName();
