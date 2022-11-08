@@ -95,9 +95,9 @@ public class Main extends JFrame {
 			panel.add(header_dummy);
 		}
 		for(int i = 1; i < row_count - 1; ++i) {
-			String time = String.valueOf((i / 2) + 1) + (i % 2 == 0 ? "A" : "B")
+			String time = String.valueOf(((i - 1) / 2) + 1) + (i % 2 == 1 ? "A" : "B")
 					+ " - "
-					+ String.valueOf((i / 2) + 9) + ":" + (i % 2 == 0 ? "00" : "30");
+					+ String.valueOf(((i - 1) / 2) + 9) + ":" + (i % 2 == 1 ? "00" : "30");
 			JLabel time_dummy = new JLabel(time);
 			panel.add(time_dummy);
 			for(int j = 1; j < col_count; ++j) {
@@ -107,6 +107,13 @@ public class Main extends JFrame {
 				viewScheduleImageMap.put(key, label);
 				panel.add(label);
 			}
+		}
+		
+		JLabel tail_dummy0 = new JLabel("이후");
+		panel.add(tail_dummy0);
+		for(int j = 1; j < col_count; ++j) {
+			JLabel tail_dummy = new JLabel("");
+			panel.add(tail_dummy);
 		}
 		
 		
@@ -119,6 +126,8 @@ public class Main extends JFrame {
 		JTableHeader courseListHeader = courseList.getTableHeader();
 		courseListHeader.addMouseListener(new DoubleClickCourseListHeader(courseList, viewCourseList));
 
+		JTableHeader courseCartHeader = courseCart.getTableHeader();
+		courseCartHeader.addMouseListener(new DoubleClickCourseListHeader(courseCart, viewCourseCart));
 		actionTest();
 	}
 	
