@@ -6,6 +6,15 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+
+import cart.CourseCart;
+import course.CourseData;
+import sort.Sort;
+import sort.SortCourseName;
+import trim.Filter;
+import trim.FilterDepartment;
+import trim.Search;
+
 import javax.swing.JScrollPane;
 
 public class Main extends JFrame {
@@ -30,9 +39,15 @@ public class Main extends JFrame {
 		courseListScrollPane.setViewportView(courseList);
 		getContentPane().add(courseListScrollPane);
 		
+		
 		courseCart = new JTable();
 		courseCart.setBounds(10, 592, 651, 358);
-		getContentPane().add(courseCart);
+		courseCart.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//		getContentPane().add(courseCart);
+		JScrollPane courseCartPane = new JScrollPane();
+		courseCartPane.setBounds(10, 592, 651, 358);
+		courseCartPane.setViewportView(courseCart);
+		getContentPane().add(courseCartPane);
 		
 		JButton searchButton = new JButton("New button");
 		searchButton.setBounds(197, 39, 117, 29);
@@ -60,6 +75,7 @@ public class Main extends JFrame {
 		getContentPane().add(saveImageButton);
 		
 		
+		
 		setVisible(true);
 		
 		actionTest();
@@ -72,5 +88,28 @@ public class Main extends JFrame {
 	private void actionTest() {
 		View viewCourseList = new ViewCourseListGUI(courseList);
 		viewCourseList.view();
+		
+		Filter filter = new FilterDepartment();
+		Search search = new Search();
+		Sort sort = new SortCourseName();
+		filter.filter("컴퓨터공학부");
+//		search.search("프로그래밍");
+		sort.sort();
+		viewCourseList.view();
+//		
+//		CourseData cd = CourseData.getInstance();
+//		CourseCart cc = CourseCart.getInstance();
+//		cc.add(cd.getCourse(4));
+//		cc.add(cd.getCourse(5));
+////		viewCart.view();
+//		
+//		filter.filter("교양학부");
+//		sort.sort();
+////		viewWorking.view();
+//		
+//		for(int i = 0; i < 60; ++i) {
+//			cc.add(cd.getCourse(i));
+//		}
+//		viewCourseList.view();
 	}
 }
