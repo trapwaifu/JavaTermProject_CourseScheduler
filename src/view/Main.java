@@ -6,57 +6,71 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
 
 public class Main extends JFrame {
-	private JTable table;
-	private JTable table_1;
+	private JTable courseList;
+	private JTable courseCart;
 	private JTextField searchQueueTextfield;
-	private JTable table_2;
+	private JTable courseImageTable;
 	Main() {
 		setTitle("Test");
-		setSize(800, 800);
+		setSize(1200, 1000);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		Container contentPane = getContentPane();
 		contentPane.setLayout(null);
 		
-		table = new JTable();
-		table.setBounds(35, 80, 416, 414);
-		getContentPane().add(table);
+		courseList = new JTable();
+		courseList.setBounds(10, 80, 651, 501);
+		courseList.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//		getContentPane().add(courseList);
+		JScrollPane courseListScrollPane = new JScrollPane();
+		courseListScrollPane.setBounds(10, 80, 651, 501);
+		courseListScrollPane.setViewportView(courseList);
+		getContentPane().add(courseListScrollPane);
 		
-		table_1 = new JTable();
-		table_1.setBounds(35, 521, 416, 216);
-		getContentPane().add(table_1);
+		courseCart = new JTable();
+		courseCart.setBounds(10, 592, 651, 358);
+		getContentPane().add(courseCart);
 		
 		JButton searchButton = new JButton("New button");
-		searchButton.setBounds(108, 39, 117, 29);
+		searchButton.setBounds(197, 39, 117, 29);
 		getContentPane().add(searchButton);
 		
 		JButton addToCartButton = new JButton("New button");
-		addToCartButton.setBounds(329, 39, 117, 29);
+		addToCartButton.setBounds(463, 39, 117, 29);
 		getContentPane().add(addToCartButton);
 		
 		JComboBox selectDepartmentCombobox = new JComboBox();
-		selectDepartmentCombobox.setBounds(225, 41, 104, 27);
+		selectDepartmentCombobox.setBounds(349, 40, 104, 27);
 		getContentPane().add(selectDepartmentCombobox);
 		
 		searchQueueTextfield = new JTextField();
-		searchQueueTextfield.setBounds(32, 39, 75, 26);
+		searchQueueTextfield.setBounds(32, 39, 155, 26);
 		getContentPane().add(searchQueueTextfield);
 		searchQueueTextfield.setColumns(10);
 		
-		table_2 = new JTable();
-		table_2.setBounds(477, 80, 300, 657);
-		getContentPane().add(table_2);
+		courseImageTable = new JTable();
+		courseImageTable.setBounds(671, 80, 503, 870);
+		getContentPane().add(courseImageTable);
 		
 		JButton saveImageButton = new JButton("New button");
-		saveImageButton.setBounds(492, 39, 117, 29);
+		saveImageButton.setBounds(671, 39, 117, 29);
 		getContentPane().add(saveImageButton);
 		
+		
 		setVisible(true);
+		
+		actionTest();
 	}
 	
 	public static void main(String[] args) {
 		Main m = new Main();
+	}
+	
+	private void actionTest() {
+		View viewCourseList = new ViewCourseListGUI(courseList);
+		viewCourseList.view();
 	}
 }

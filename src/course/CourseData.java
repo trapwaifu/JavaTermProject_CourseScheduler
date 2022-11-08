@@ -20,6 +20,9 @@ public class CourseData {
 			e.printStackTrace();
 		}
 	}
+	public int size() {
+		return workingData.size();
+	}
 	public static CourseData getInstance() {
 		if(instance == null)
 			instance = new CourseData();
@@ -64,6 +67,7 @@ public class CourseData {
 				time = new int[0];
 			}
 
+			// Change all parameters to string
 			Course c = 	new Course(split[0], split[1], split[2], split[3], split[4], Integer.parseInt(split[5]),
 					Integer.parseInt(split[6]), split[7], split[8], split[9], time);
 			data.add(c);
