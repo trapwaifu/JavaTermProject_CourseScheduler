@@ -34,7 +34,7 @@ public class Main extends JFrame {
 	
 	Main() {
 		setTitle("Test");
-		setSize(1200, 888);
+		setSize(1200, 749);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		Container contentPane = getContentPane();
@@ -45,7 +45,7 @@ public class Main extends JFrame {
 		courseList.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //		getContentPane().add(courseList);
 		JScrollPane courseListScrollPane = new JScrollPane();
-		courseListScrollPane.setBounds(10, 80, 651, 432);
+		courseListScrollPane.setBounds(10, 80, 651, 347);
 		courseListScrollPane.setViewportView(courseList);
 		getContentPane().add(courseListScrollPane);
 		
@@ -55,7 +55,7 @@ public class Main extends JFrame {
 		courseCart.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //		getContentPane().add(courseCart);
 		JScrollPane courseCartPane = new JScrollPane();
-		courseCartPane.setBounds(10, 523, 651, 319);
+		courseCartPane.setBounds(10, 438, 651, 273);
 		courseCartPane.setViewportView(courseCart);
 		getContentPane().add(courseCartPane);
 		
@@ -81,7 +81,7 @@ public class Main extends JFrame {
 		getContentPane().add(saveImageButton);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(671, 80, 503, 762);
+		panel.setBounds(671, 80, 503, 631);
 		getContentPane().add(panel);
 		panel.setLayout(new GridLayout(20, 6, 0, 0));
 		
