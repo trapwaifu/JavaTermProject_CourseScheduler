@@ -7,10 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextPane;
 
 public class GUI_Test extends JFrame {
 	private JTable table;
 	private JScrollPane scrollPane;
+	private JTable table_1;
 
 	// Constructor
 	GUI_Test()
@@ -34,9 +36,14 @@ public class GUI_Test extends JFrame {
 				}
 			}
 		});
+		getContentPane().setLayout(null);
 		scrollPane= new JScrollPane(table);
-		add(scrollPane);
-		setSize(375, 250);
+		scrollPane.setBounds(0, 0, 591, 372);
+		getContentPane().add(scrollPane);
+		
+		table_1 = new JTable();
+		scrollPane.setRowHeaderView(table_1);
+		setSize(577, 387);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
