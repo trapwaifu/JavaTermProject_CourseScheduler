@@ -16,6 +16,7 @@ import javax.swing.table.JTableHeader;
 
 import cart.CourseCart;
 import course.CourseData;
+import event.ClickAddToCartButton;
 import event.ClickCourseListHeader;
 import event.ClickSearchButton;
 import event.ComboBoxSelection;
@@ -45,7 +46,7 @@ public class Main extends JFrame {
 		contentPane.setLayout(null);
 		
 		courseList = new JTable();
-		courseList.setBounds(10, 80, 651, 501);
+		courseList.setBounds(10, 80, 651, 347);
 		courseList.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //		getContentPane().add(courseList);
 		JScrollPane courseListScrollPane = new JScrollPane();
@@ -55,7 +56,7 @@ public class Main extends JFrame {
 		
 		
 		courseCart = new JTable();
-		courseCart.setBounds(10, 592, 651, 358);
+		courseCart.setBounds(10, 438, 651, 273);
 		courseCart.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //		getContentPane().add(courseCart);
 		JScrollPane courseCartPane = new JScrollPane();
@@ -134,7 +135,7 @@ public class Main extends JFrame {
 		JTableHeader courseListHeader = courseList.getTableHeader();
 		courseListHeader.addMouseListener(new ClickCourseListHeader(courseList, viewCourseList));
 		courseList.addMouseListener(new DoubleClickCourseListRow(viewCourseList, viewCourseCart));
-//		addToCartButton.addActionListener(new ClickAddToCart(viewCourseList, viewCourseCart, ))
+		addToCartButton.addActionListener(new ClickAddToCartButton(courseList, viewCourseCart));
 		
 		JTableHeader courseCartHeader = courseCart.getTableHeader();
 		courseCartHeader.addMouseListener(new ClickCourseListHeader(courseCart, viewCourseCart));
@@ -145,6 +146,8 @@ public class Main extends JFrame {
 		searchButton.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
 		searchQueueTextfield.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
 
+		
+		
 		viewCourseList.view();
 		viewCourseCart.view();
 //		actionTest();

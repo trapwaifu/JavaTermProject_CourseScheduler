@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import course.Course;
 
 public class CourseCart {
@@ -29,11 +31,14 @@ public class CourseCart {
 		// return true if there are no conflicts
 		
 		for(var time : c.time) {
-			if(bookedTime.containsKey(time) && bookedTime.get(time) == true)
+			if(bookedTime.containsKey(time) && bookedTime.get(time) == true) {
+				JOptionPane.showMessageDialog(null, "시간표 충돌");
 				return false;
+			}
 		}
 		for(var bookedCourses : cart) {
 			if(bookedCourses.code.equals(c.code)) {
+				JOptionPane.showMessageDialog(null, "이미 수강한 과목");
 				return false;
 			}
 		}
