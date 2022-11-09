@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
@@ -88,7 +89,7 @@ public class Main extends JFrame {
 		searchQueueTextfield.setColumns(10);
 		
 		JButton saveImageButton = new JButton("New button");
-		saveImageButton.setBounds(671, 39, 117, 29);
+		saveImageButton.setBounds(671, 11, 117, 29);
 		getContentPane().add(saveImageButton);
 		
 		JButton removeCourseButton = new JButton("New button");
@@ -110,7 +111,7 @@ public class Main extends JFrame {
 		
 		
 		JLayeredPane panel = new JLayeredPane();
-		panel.setBounds(671, 80, 503, 619);
+		panel.setBounds(671, 50, 503, 649);
 		getContentPane().add(panel);
 		panel.setLayout(new GridBagLayout());
 //		panel.setLayout(new GridLayout());
@@ -126,8 +127,10 @@ public class Main extends JFrame {
 			gbc.gridy = 0;
 			gbc.weightx = 0.5;
 			gbc.weighty = 0.5;
-			JLabel dummy = new JLabel(imageHeader[j]);
-			panel.add(dummy, gbc);
+			JTextArea dummy = new JTextArea(imageHeader[j]);
+			JScrollPane areaScrollPane = new JScrollPane(dummy);
+
+			panel.add(areaScrollPane, gbc);
 		}
 		
 		for(int i = 1; i < row_count - 1; ++i) {						
@@ -140,32 +143,41 @@ public class Main extends JFrame {
 					String time = String.valueOf(((i - 1) / 2) + 1) + (i % 2 == 1 ? "A" : "B")
 							+ " - "
 							+ String.valueOf(((i - 1) / 2) + 9) + ":" + (i % 2 == 1 ? "00" : "30");
-					JLabel time_dummy = new JLabel(time);
-					panel.add(time_dummy, gbc);
+					JTextArea time_dummy = new JTextArea(time);
+					time_dummy.setColumns(5);
+					JScrollPane areaScrollPane = new JScrollPane(time_dummy);
+
+					panel.add(areaScrollPane, gbc);
 				}
 				else {
 					int key = (j-1) * 100 + i - 1;
-					JLabel label = new JLabel(Integer.toString(key));
+//					JTextArea label = new JTextArea(Integer.toString(key));
+					JTextArea label = new JTextArea();
 					label.setOpaque(true);
+					label.setColumns(5);
 					contentLocationInfo.put(key, new GridLocationInfo(gbc.gridx, gbc.gridy, gbc.weightx, gbc.weighty));
-					panel.add(label, gbc);
+					JScrollPane areaScrollPane = new JScrollPane(label);
+
+					panel.add(areaScrollPane, gbc);
 				}
 			}
 		}
 		for(int j = 0; j < col_count; ++j) {
-			JLabel dummy = null;
+			JTextArea dummy = null;
 			if(j == 0) {
-				dummy = new JLabel("이후");
+				dummy = new JTextArea("이후");
 			}
 			else {
-				dummy = new JLabel("");
+				dummy = new JTextArea("");
 			}
 			gbc.gridx = j;
 			gbc.gridy = row_count - 1;
-			gbc.weightx = 0;
-			gbc.weighty = 0;
+			gbc.weightx = 0.5;
+			gbc.weighty = 0.5;
 			
-			panel.add(dummy, gbc);		
+			JScrollPane areaScrollPane = new JScrollPane(dummy);
+
+			panel.add(areaScrollPane, gbc);		
 		}
 		
 		// Test

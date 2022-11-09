@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import course.Course;
@@ -17,7 +17,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 	JLayeredPane panel;
 	GridBagConstraints gbc;
 	Map<Integer, GridLocationInfo> contentLocationInfo;
-	Map<Course, ArrayList<JTextArea>> labelMap = new HashMap<>();
+	Map<Course, ArrayList<JScrollPane>> labelMap = new HashMap<>();
 	
 	public ViewCourseImageGUI(JLayeredPane panel, GridBagConstraints gbc,
 			Map<Integer, GridLocationInfo> contentLocationInfo) {
@@ -35,7 +35,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 	
 	@Override
 	public void updateAdd(Course course) {
-		ArrayList<JTextArea> labelList = new ArrayList<JTextArea>();
+		ArrayList<JScrollPane> labelList = new ArrayList<JScrollPane>();
 		
 		if(course.time.length == 0) return;
 		
@@ -65,9 +65,11 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 					JTextArea prev = new JTextArea(course.courseName + " " + course.division + " " + course.professor);
 					prev.setColumns(5);
 					prev.setOpaque(true);
-					labelList.add(prev);
-//					prev.setLineWrap(true);
-					panel.add(prev, gbc, 2);
+					prev.setLineWrap(true);
+					JScrollPane areaScrollPane = new JScrollPane(prev);
+					labelList.add(areaScrollPane);
+
+					panel.add(areaScrollPane, gbc, 2);
 				}
 				// initialize current
 				gbc.gridheight = 1;
@@ -82,10 +84,12 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 		if(course.time.length > 0  && gbc.gridx != 0) {
 			JTextArea prev = new JTextArea(course.courseName + " " + course.division + " " + course.professor);
 			prev.setColumns(5);
-//			prev.setLineWrap(true);
+			prev.setLineWrap(true);
 			prev.setOpaque(true);
-			labelList.add(prev);
-			panel.add(prev, gbc, 2);
+			JScrollPane areaScrollPane = new JScrollPane(prev);
+			labelList.add(areaScrollPane);
+
+			panel.add(areaScrollPane, gbc, 2);
 		}
 
 		labelMap.put(course, labelList);
@@ -97,7 +101,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 	@Override
 	public void updateRemove(Course course) {
 		var removeList = labelMap.get(course);
-		for(JTextArea label : removeList) {
+		for(JScrollPane label : removeList) {
 			panel.remove(label);
 		}
 		labelMap.remove(course);
@@ -108,13 +112,13 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 	
 	@Override
 	public void updateReset() {
-		for(Map.Entry<Course, ArrayList<JTextArea>> entry : labelMap.entrySet()) {
+		for(Map.Entry<Course, ArrayList<JScrollPane>> entry : labelMap.entrySet()) {
 			for(var label : entry.getValue()) {
 				panel.remove(label);
 			}
 		}
 		
-		labelMap = new HashMap<Course, ArrayList<JTextArea>>();
+		labelMap = new HashMap<Course, ArrayList<JScrollPane>>();
 		
 		panel.revalidate();
 		panel.repaint();
