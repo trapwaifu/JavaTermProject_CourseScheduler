@@ -134,6 +134,8 @@ public class Main extends JFrame {
 		JTableHeader courseListHeader = courseList.getTableHeader();
 		courseListHeader.addMouseListener(new ClickCourseListHeader(courseList, viewCourseList));
 		courseList.addMouseListener(new DoubleClickCourseListRow(viewCourseList, viewCourseCart));
+//		addToCartButton.addActionListener(new ClickAddToCart(viewCourseList, viewCourseCart, ))
+		
 		JTableHeader courseCartHeader = courseCart.getTableHeader();
 		courseCartHeader.addMouseListener(new ClickCourseListHeader(courseCart, viewCourseCart));
 		courseCart.addMouseListener(new DoubleClickCourseCartRow(viewCourseCart));
