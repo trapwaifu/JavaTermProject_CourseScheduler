@@ -88,23 +88,25 @@ public class Main extends JFrame {
 		getContentPane().add(searchQueueTextfield);
 		searchQueueTextfield.setColumns(10);
 		
-		JButton saveImageButton = new JButton("New button");
+		JButton saveImageButton = new JButton("이미지 저장");
 		saveImageButton.setBounds(671, 11, 117, 29);
 		getContentPane().add(saveImageButton);
 		
-		JButton removeCourseButton = new JButton("New button");
+		JButton removeCourseButton = new JButton("과목 지우기");
 		removeCourseButton.setBounds(20, 438, 89, 23);
 		getContentPane().add(removeCourseButton);
 		
-		JButton resetButton = new JButton("New button");
+		JButton resetButton = new JButton("초기화");
 		resetButton.setBounds(120, 438, 89, 23);
 		getContentPane().add(resetButton);
 		
-		JLabel currentCreditLabel = new JLabel("New label");
+		JLabel currentCreditLabel = new JLabel("현재 학점 : 0");
 		currentCreditLabel.setBounds(219, 442, 132, 14);
 		getContentPane().add(currentCreditLabel);
+		ViewCreditGUI viewCredit = new ViewCreditGUI(currentCreditLabel);
+		CourseCart.getInstance().addObserver(viewCredit);
 		
-		JButton recommendCourseButton = new JButton("New button");
+		JButton recommendCourseButton = new JButton("과목 추천");
 		recommendCourseButton.setBounds(553, 438, 89, 23);
 		getContentPane().add(recommendCourseButton);
 		

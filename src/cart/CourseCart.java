@@ -84,4 +84,11 @@ public class CourseCart implements CourseCartObservable{
 		bookedTime = new HashMap<Integer, Boolean>();
 		notifyObserversReset();
 	}
+	public int getCredit() {
+		int credit = 0;
+		for(var course : cart) {
+			credit += course.credit;
+		}
+		return credit;
+	}
 }
