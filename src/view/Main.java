@@ -137,8 +137,9 @@ public class Main extends JFrame {
 		
 		selectDepartmentCombobox.addItemListener(new ComboBoxSelection(viewCourseList));
 		
-		
-		actionTest();
+		viewCourseList.view();
+		viewCourseCart.view();
+//		actionTest();
 	}
 	
 	public static void main(String[] args) {
