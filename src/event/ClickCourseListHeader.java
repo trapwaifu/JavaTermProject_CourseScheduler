@@ -11,11 +11,11 @@ import sort.Sort;
 import sort.SortCode;
 import view.View;
 
-public class DoubleClickCourseListHeader extends MouseAdapter {
+public class ClickCourseListHeader extends MouseAdapter {
 	private JTable table;
 	private View view;
 	
-	public DoubleClickCourseListHeader(JTable table, View view) {
+	public ClickCourseListHeader(JTable table, View view) {
 		this.table = table;
 		this.view = view;
 	}

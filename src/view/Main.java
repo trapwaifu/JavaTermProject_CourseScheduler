@@ -17,8 +17,9 @@ import javax.swing.table.JTableHeader;
 import cart.CourseCart;
 import course.CourseData;
 import event.ComboBoxSelection;
-import event.DoubleClickCourseListHeader;
-import event.DoubleClickTableRow;
+import event.DoubleClickCourseCartRow;
+import event.ClickCourseListHeader;
+import event.DoubleClickCourseListRow;
 import sort.Sort;
 import sort.SortCourseName;
 import trim.Filter;
@@ -130,10 +131,11 @@ public class Main extends JFrame {
 		viewCourseCart = new ViewCourseCartGUI(courseCart);
 
 		JTableHeader courseListHeader = courseList.getTableHeader();
-		courseListHeader.addMouseListener(new DoubleClickCourseListHeader(courseList, viewCourseList));
-		courseList.addMouseListener(new DoubleClickTableRow(viewCourseList, viewCourseCart));
+		courseListHeader.addMouseListener(new ClickCourseListHeader(courseList, viewCourseList));
+		courseList.addMouseListener(new DoubleClickCourseListRow(viewCourseList, viewCourseCart));
 		JTableHeader courseCartHeader = courseCart.getTableHeader();
-		courseCartHeader.addMouseListener(new DoubleClickCourseListHeader(courseCart, viewCourseCart));
+		courseCartHeader.addMouseListener(new ClickCourseListHeader(courseCart, viewCourseCart));
+		courseCart.addMouseListener(new DoubleClickCourseCartRow(viewCourseCart));
 		
 		selectDepartmentCombobox.addItemListener(new ComboBoxSelection(viewCourseList));
 		

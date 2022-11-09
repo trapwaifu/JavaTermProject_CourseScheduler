@@ -11,12 +11,10 @@ import course.Course;
 import course.CourseData;
 import view.View;
 
-public class DoubleClickTableRow extends MouseAdapter{
-	private View viewCourseList;
+public class DoubleClickCourseCartRow extends MouseAdapter{
 	private View viewCourseCart;
-	public DoubleClickTableRow(View view1, View view2) {
-		this.viewCourseList = view1;
-		this.viewCourseCart = view2;
+	public DoubleClickCourseCartRow(View view) {
+		this.viewCourseCart = view;
 	}
 	@Override
 	public void mouseClicked(MouseEvent event) {
@@ -24,10 +22,9 @@ public class DoubleClickTableRow extends MouseAdapter{
 			JTable table = (JTable) event.getSource();
 			int row = table.getSelectedRow();
 			
-			Course selected = CourseData.getInstance().getData().get(row); 
-			CourseCart.getInstance().add(selected);
-			JOptionPane.showMessageDialog(table, selected);
-			viewCourseList.view();
+			Course selected = CourseCart.getInstance().getCart().get(row); 
+			CourseCart.getInstance().remove(row);
+//			JOptionPane.showMessageDialog(table, selected);
 			viewCourseCart.view();
 		}
 	}

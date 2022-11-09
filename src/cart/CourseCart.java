@@ -46,8 +46,8 @@ public class CourseCart {
 		
 		return true;
 	}
-	public void remove(Course c) {
-		cart.remove(c);
+	public void remove(int index) {
+		cart.remove(index);
 	}
 	public void reset() {
 		cart = new ArrayList<Course>();
