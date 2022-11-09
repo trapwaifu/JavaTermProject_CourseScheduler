@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JTextArea;
 
 import course.Course;
 import observerinterface.CourseCartObserver;
@@ -16,7 +17,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 	JLayeredPane panel;
 	GridBagConstraints gbc;
 	Map<Integer, GridLocationInfo> contentLocationInfo;
-	Map<Course, ArrayList<JLabel>> labelMap = new HashMap<>();
+	Map<Course, ArrayList<JTextArea>> labelMap = new HashMap<>();
 	
 	public ViewCourseImageGUI(JLayeredPane panel, GridBagConstraints gbc,
 			Map<Integer, GridLocationInfo> contentLocationInfo) {
@@ -34,7 +35,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 	
 	@Override
 	public void updateAdd(Course course) {
-		ArrayList<JLabel> labelList = new ArrayList<JLabel>();
+		ArrayList<JTextArea> labelList = new ArrayList<JTextArea>();
 		
 		if(course.time.length == 0) return;
 		
@@ -61,9 +62,11 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 			else {
 				// register previous
 				if(gbc.gridx != 0) {
-					JLabel prev = new JLabel(course.courseName + " " + course.division + " " + course.professor);
+					JTextArea prev = new JTextArea(course.courseName + " " + course.division + " " + course.professor);
+					prev.setColumns(5);
 					prev.setOpaque(true);
 					labelList.add(prev);
+//					prev.setLineWrap(true);
 					panel.add(prev, gbc, 2);
 				}
 				// initialize current
@@ -77,7 +80,9 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 		
 		// register final time(final label is not registered inside the loop)
 		if(course.time.length > 0  && gbc.gridx != 0) {
-			JLabel prev = new JLabel(course.courseName + " " + course.division + " " + course.professor);
+			JTextArea prev = new JTextArea(course.courseName + " " + course.division + " " + course.professor);
+			prev.setColumns(5);
+//			prev.setLineWrap(true);
 			prev.setOpaque(true);
 			labelList.add(prev);
 			panel.add(prev, gbc, 2);
@@ -92,7 +97,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 	@Override
 	public void updateRemove(Course course) {
 		var removeList = labelMap.get(course);
-		for(JLabel label : removeList) {
+		for(JTextArea label : removeList) {
 			panel.remove(label);
 		}
 		labelMap.remove(course);
@@ -103,13 +108,13 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 	
 	@Override
 	public void updateReset() {
-		for(Map.Entry<Course, ArrayList<JLabel>> entry : labelMap.entrySet()) {
+		for(Map.Entry<Course, ArrayList<JTextArea>> entry : labelMap.entrySet()) {
 			for(var label : entry.getValue()) {
 				panel.remove(label);
 			}
 		}
 		
-		labelMap = new HashMap<Course, ArrayList<JLabel>>();
+		labelMap = new HashMap<Course, ArrayList<JTextArea>>();
 		
 		panel.revalidate();
 		panel.repaint();

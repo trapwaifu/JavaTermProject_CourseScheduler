@@ -113,6 +113,7 @@ public class Main extends JFrame {
 		panel.setBounds(671, 80, 503, 619);
 		getContentPane().add(panel);
 		panel.setLayout(new GridBagLayout());
+//		panel.setLayout(new GridLayout());
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -161,8 +162,8 @@ public class Main extends JFrame {
 			}
 			gbc.gridx = j;
 			gbc.gridy = row_count - 1;
-			gbc.weightx = 0.5;
-			gbc.weighty = 0.5;
+			gbc.weightx = 0;
+			gbc.weighty = 0;
 			
 			panel.add(dummy, gbc);		
 		}
