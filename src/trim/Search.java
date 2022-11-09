@@ -10,7 +10,7 @@ public class Search {
 		if(query == null || query.equals("")) return;
 		
 		var data = CourseData.getInstance().getData();
-		data = data.stream().filter(p -> p.courseName.contains(query)).collect(Collectors.toCollection(ArrayList::new));
+		data = data.stream().filter(p -> p.courseName.toLowerCase().contains(query.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
 		CourseData.getInstance().update(data);
 	}
 }

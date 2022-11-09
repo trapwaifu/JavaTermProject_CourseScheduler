@@ -16,9 +16,10 @@ import javax.swing.table.JTableHeader;
 
 import cart.CourseCart;
 import course.CourseData;
+import event.ClickCourseListHeader;
+import event.ClickSearchButton;
 import event.ComboBoxSelection;
 import event.DoubleClickCourseCartRow;
-import event.ClickCourseListHeader;
 import event.DoubleClickCourseListRow;
 import sort.Sort;
 import sort.SortCourseName;
@@ -62,11 +63,11 @@ public class Main extends JFrame {
 		courseCartPane.setViewportView(courseCart);
 		getContentPane().add(courseCartPane);
 		
-		JButton searchButton = new JButton("New button");
+		JButton searchButton = new JButton("검색");
 		searchButton.setBounds(197, 39, 117, 29);
 		getContentPane().add(searchButton);
 		
-		JButton addToCartButton = new JButton("New button");
+		JButton addToCartButton = new JButton("과목 담기");
 		addToCartButton.setBounds(463, 39, 117, 29);
 		getContentPane().add(addToCartButton);
 		
@@ -139,6 +140,9 @@ public class Main extends JFrame {
 		
 		selectDepartmentCombobox.addItemListener(new ComboBoxSelection(viewCourseList));
 		
+		searchButton.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
+		searchQueueTextfield.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
+
 		viewCourseList.view();
 		viewCourseCart.view();
 //		actionTest();
