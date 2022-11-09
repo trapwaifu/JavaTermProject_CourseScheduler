@@ -47,6 +47,10 @@ public class CourseCart {
 		return true;
 	}
 	public void remove(int index) {
+		Course course = cart.get(index);
+		for(var time : course.time)
+			bookedTime.put(time, false);
+		
 		cart.remove(index);
 	}
 	public void reset() {
