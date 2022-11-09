@@ -60,7 +60,7 @@ public class Main extends JFrame {
 		courseCart.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //		getContentPane().add(courseCart);
 		JScrollPane courseCartPane = new JScrollPane();
-		courseCartPane.setBounds(10, 438, 651, 273);
+		courseCartPane.setBounds(10, 475, 651, 224);
 		courseCartPane.setViewportView(courseCart);
 		getContentPane().add(courseCartPane);
 		
@@ -90,7 +90,7 @@ public class Main extends JFrame {
 		getContentPane().add(saveImageButton);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(671, 80, 503, 631);
+		panel.setBounds(671, 80, 503, 619);
 		getContentPane().add(panel);
 		panel.setLayout(new GridLayout(20, 6, 0, 0));
 		
@@ -145,6 +145,22 @@ public class Main extends JFrame {
 		
 		searchButton.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
 		searchQueueTextfield.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
+		
+		JButton removeCourseButton = new JButton("New button");
+		removeCourseButton.setBounds(20, 438, 89, 23);
+		getContentPane().add(removeCourseButton);
+		
+		JButton resetButton = new JButton("New button");
+		resetButton.setBounds(120, 438, 89, 23);
+		getContentPane().add(resetButton);
+		
+		JLabel currentCreditLabel = new JLabel("New label");
+		currentCreditLabel.setBounds(219, 442, 132, 14);
+		getContentPane().add(currentCreditLabel);
+		
+		JButton recommendCourseButton = new JButton("New button");
+		recommendCourseButton.setBounds(553, 438, 89, 23);
+		getContentPane().add(recommendCourseButton);
 
 		
 		
