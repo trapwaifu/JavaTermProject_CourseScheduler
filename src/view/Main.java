@@ -10,7 +10,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -35,9 +34,10 @@ public class Main extends JFrame {
 	private JTable courseCart;
 	private JTextField searchQueueTextfield;
 	
-	private Map<Integer, JLabel> viewScheduleImageMap = new HashMap<>();
+	private Map<Integer, GridLocationInfo> contentLocationInfo = new HashMap<>();
 	private ViewCourseListGUI viewCourseList = null;
 	private ViewCourseCartGUI viewCourseCart = null;
+	private ViewCourseImageGUI viewCourseImage = null;
 	
 	Main() {
 		setTitle("Test");
@@ -143,10 +143,10 @@ public class Main extends JFrame {
 					panel.add(time_dummy, gbc);
 				}
 				else {
-					int key = j * 100 + i - 1;
+					int key = (j-1) * 100 + i - 1;
 					JLabel label = new JLabel(Integer.toString(key));
 					label.setOpaque(true);
-					viewScheduleImageMap.put(key, label);
+					contentLocationInfo.put(key, new GridLocationInfo(gbc.gridx, gbc.gridy, gbc.weightx, gbc.weighty));
 					panel.add(label, gbc);
 				}
 			}
@@ -168,15 +168,14 @@ public class Main extends JFrame {
 		}
 		
 		// Test
-		gbc.gridx = 3;
-		gbc.gridy = 16;
-		gbc.gridheight = 3;
-		gbc.gridwidth = 1;
-		JLabel testUnit = new JLabel("Test Unit");
-		testUnit.setOpaque(true);
-		panel.add(testUnit, gbc, 2);
-		panel.remove(testUnit);
-		
+//		gbc.gridx = 3;
+//		gbc.gridy = 3;
+//		gbc.gridheight = 3;
+//		gbc.gridwidth = 1;
+//		JLabel testUnit = new JLabel("Test Unit");
+//		testUnit.setOpaque(true);
+//		panel.add(testUnit, gbc, 2);
+		//panel.remove(testUnit);
 		
 		
 		
@@ -200,8 +199,9 @@ public class Main extends JFrame {
 		searchButton.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
 		searchQueueTextfield.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
 		
-
 		
+		viewCourseImage = new ViewCourseImageGUI(panel, gbc, contentLocationInfo);
+		CourseCart.getInstance().addObserver(viewCourseImage);
 		
 		viewCourseList.view();
 		viewCourseCart.view();
