@@ -18,6 +18,7 @@ import cart.CourseCart;
 import course.CourseData;
 import event.ComboBoxSelection;
 import event.DoubleClickCourseListHeader;
+import event.DoubleClickTableRow;
 import sort.Sort;
 import sort.SortCourseName;
 import trim.Filter;
@@ -130,7 +131,7 @@ public class Main extends JFrame {
 
 		JTableHeader courseListHeader = courseList.getTableHeader();
 		courseListHeader.addMouseListener(new DoubleClickCourseListHeader(courseList, viewCourseList));
-
+		courseList.addMouseListener(new DoubleClickTableRow(viewCourseList, viewCourseCart));
 		JTableHeader courseCartHeader = courseCart.getTableHeader();
 		courseCartHeader.addMouseListener(new DoubleClickCourseListHeader(courseCart, viewCourseCart));
 		
