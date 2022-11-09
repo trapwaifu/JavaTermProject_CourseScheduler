@@ -1,6 +1,7 @@
 package view;
 import java.awt.Container;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -89,45 +91,97 @@ public class Main extends JFrame {
 		saveImageButton.setBounds(671, 39, 117, 29);
 		getContentPane().add(saveImageButton);
 		
-		JPanel panel = new JPanel();
+		JButton removeCourseButton = new JButton("New button");
+		removeCourseButton.setBounds(20, 438, 89, 23);
+		getContentPane().add(removeCourseButton);
+		
+		JButton resetButton = new JButton("New button");
+		resetButton.setBounds(120, 438, 89, 23);
+		getContentPane().add(resetButton);
+		
+		JLabel currentCreditLabel = new JLabel("New label");
+		currentCreditLabel.setBounds(219, 442, 132, 14);
+		getContentPane().add(currentCreditLabel);
+		
+		JButton recommendCourseButton = new JButton("New button");
+		recommendCourseButton.setBounds(553, 438, 89, 23);
+		getContentPane().add(recommendCourseButton);
+		
+		
+		
+		JLayeredPane panel = new JLayeredPane();
 		panel.setBounds(671, 80, 503, 619);
 		getContentPane().add(panel);
-		panel.setLayout(new GridLayout(20, 6, 0, 0));
+		panel.setLayout(new GridBagLayout());
+		
+		GridBagConstraints gbc = new GridBagConstraints();
 		
 		int row_count = 20;
 		int col_count = 6;
-		String[] imageHeader = {"월요일", "화요일", "수요일", "목요일", "금요일"};
-		JLabel dummy = new JLabel("");
-		panel.add(dummy);
+		String[] imageHeader = {"   ", "월요일", "화요일", "수요일", "목요일", "금요일"};
 		for(int j = 0; j < imageHeader.length; ++j) {
-			JLabel header_dummy = new JLabel(imageHeader[j]);
-			panel.add(header_dummy);
-		}
-		for(int i = 1; i < row_count - 1; ++i) {
-			String time = String.valueOf(((i - 1) / 2) + 1) + (i % 2 == 1 ? "A" : "B")
-					+ " - "
-					+ String.valueOf(((i - 1) / 2) + 9) + ":" + (i % 2 == 1 ? "00" : "30");
-			JLabel time_dummy = new JLabel(time);
-			panel.add(time_dummy);
-			for(int j = 1; j < col_count; ++j) {
-				int key = j * 100 + i - 1;
-				JLabel label = new JLabel(Integer.toString(key));
-				label.setOpaque(true);
-				viewScheduleImageMap.put(key, label);
-				panel.add(label);
-			}
+			gbc.fill = GridBagConstraints.BOTH;
+			gbc.gridx = j;
+			gbc.gridy = 0;
+			gbc.weightx = 0.5;
+			gbc.weighty = 0.5;
+			JLabel dummy = new JLabel(imageHeader[j]);
+			panel.add(dummy, gbc);
 		}
 		
-		JLabel tail_dummy0 = new JLabel("이후");
-		panel.add(tail_dummy0);
-		for(int j = 1; j < col_count; ++j) {
-			JLabel tail_dummy = new JLabel("");
-			panel.add(tail_dummy);
+		for(int i = 1; i < row_count - 1; ++i) {						
+			for(int j = 0; j < col_count; ++j) {
+				gbc.gridx = j;
+				gbc.gridy = i;
+				gbc.weightx = 0.5;
+				gbc.weighty = 0.5;
+				if(j == 0) {
+					String time = String.valueOf(((i - 1) / 2) + 1) + (i % 2 == 1 ? "A" : "B")
+							+ " - "
+							+ String.valueOf(((i - 1) / 2) + 9) + ":" + (i % 2 == 1 ? "00" : "30");
+					JLabel time_dummy = new JLabel(time);
+					panel.add(time_dummy, gbc);
+				}
+				else {
+					int key = j * 100 + i - 1;
+					JLabel label = new JLabel(Integer.toString(key));
+					label.setOpaque(true);
+					viewScheduleImageMap.put(key, label);
+					panel.add(label, gbc);
+				}
+			}
 		}
+		for(int j = 0; j < col_count; ++j) {
+			JLabel dummy = null;
+			if(j == 0) {
+				dummy = new JLabel("이후");
+			}
+			else {
+				dummy = new JLabel("");
+			}
+			gbc.gridx = j;
+			gbc.gridy = row_count - 1;
+			gbc.weightx = 0.5;
+			gbc.weighty = 0.5;
+			
+			panel.add(dummy, gbc);		
+		}
+		
+		// Test
+		gbc.gridx = 3;
+		gbc.gridy = 16;
+		gbc.gridheight = 3;
+		gbc.gridwidth = 1;
+		JLabel testUnit = new JLabel("Test Unit");
+		testUnit.setOpaque(true);
+		panel.add(testUnit, gbc, 2);
+		panel.remove(testUnit);
+		
+		
 		
 		
 		setVisible(true);
-		
+
 		
 		viewCourseList = new ViewCourseListGUI(courseList);
 		viewCourseCart = new ViewCourseCartGUI(courseCart);
@@ -146,21 +200,6 @@ public class Main extends JFrame {
 		searchButton.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
 		searchQueueTextfield.addActionListener(new ClickSearchButton(searchQueueTextfield, selectDepartmentCombobox, viewCourseList));
 		
-		JButton removeCourseButton = new JButton("New button");
-		removeCourseButton.setBounds(20, 438, 89, 23);
-		getContentPane().add(removeCourseButton);
-		
-		JButton resetButton = new JButton("New button");
-		resetButton.setBounds(120, 438, 89, 23);
-		getContentPane().add(resetButton);
-		
-		JLabel currentCreditLabel = new JLabel("New label");
-		currentCreditLabel.setBounds(219, 442, 132, 14);
-		getContentPane().add(currentCreditLabel);
-		
-		JButton recommendCourseButton = new JButton("New button");
-		recommendCourseButton.setBounds(553, 438, 89, 23);
-		getContentPane().add(recommendCourseButton);
 
 		
 		
