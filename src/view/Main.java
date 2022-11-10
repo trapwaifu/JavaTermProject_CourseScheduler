@@ -20,6 +20,7 @@ import cart.CourseCart;
 import course.CourseData;
 import event.ClickAddToCartButton;
 import event.ClickCourseListHeader;
+import event.ClickResetButton;
 import event.ClickSearchButton;
 import event.ComboBoxSelection;
 import event.DoubleClickCourseCartRow;
@@ -199,6 +200,8 @@ public class Main extends JFrame {
 		
 		viewCourseList = new ViewCourseListGUI(courseList);
 		viewCourseCart = new ViewCourseCartGUI(courseCart);
+		
+		resetButton.addActionListener(new ClickResetButton(viewCourseCart));
 
 		JTableHeader courseListHeader = courseList.getTableHeader();
 		courseListHeader.addMouseListener(new ClickCourseListHeader(courseList, viewCourseList));
