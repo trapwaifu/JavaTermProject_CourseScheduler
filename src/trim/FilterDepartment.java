@@ -19,7 +19,7 @@ public class FilterDepartment implements Filter {
 			CourseData.getInstance().reset();
 			return;
 		}
-		System.out.println("here");
+//		System.out.println("here");
 		CourseData.getInstance().reset();
 		var data = CourseData.getInstance().getData();
 		data = data.stream().filter(p -> p.department.equals(department)).collect(Collectors.toCollection(ArrayList::new));
