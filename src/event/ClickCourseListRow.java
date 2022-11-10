@@ -56,13 +56,14 @@ public class ClickCourseListRow extends MouseAdapter{
 		for(var pn : panelList) {
 			panel.remove(pn);
 		}
+		// draw panel for selected course
+		draw(course, true);
+		
 		// draw panel for courses with same name
 		for(var c : identicalCourses) {
 			draw(c, false);
 		}
 		
-		// draw panel for selected course
-		draw(course, true);
 		
 		// update view
 		panel.revalidate();

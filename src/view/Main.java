@@ -19,6 +19,7 @@ import javax.swing.table.JTableHeader;
 import cart.CourseCart;
 import course.CourseData;
 import event.ClickAddToCartButton;
+import event.ClickAutoFill;
 import event.ClickCourseListHeader;
 import event.ClickCourseListRow;
 import event.ClickRemoveCourseButton;
@@ -215,6 +216,8 @@ public class Main extends JFrame {
 		CourseCart.getInstance().addObserver(viewCourseImage);
 		
 		courseList.addMouseListener(new ClickCourseListRow(panel, gbc, contentLocationInfo));
+		
+		recommendCourseButton.addActionListener(new ClickAutoFill(viewCourseCart));
 		
 		viewCourseList.view();
 		viewCourseCart.view();

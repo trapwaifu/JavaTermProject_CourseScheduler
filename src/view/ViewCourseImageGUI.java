@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -69,6 +70,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 					prev.setLineWrap(true);
 					prev.setBackground(Color.yellow);
 					JScrollPane areaScrollPane = new JScrollPane(prev);
+
 					labelList.add(areaScrollPane);
 
 					panel.add(areaScrollPane, gbc, 5);
@@ -89,7 +91,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 			prev.setLineWrap(true);
 			prev.setOpaque(true);
 			prev.setBackground(Color.yellow);
-
+			
 			JScrollPane areaScrollPane = new JScrollPane(prev);
 			labelList.add(areaScrollPane);
 

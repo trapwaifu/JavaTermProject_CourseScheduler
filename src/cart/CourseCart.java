@@ -91,4 +91,9 @@ public class CourseCart implements CourseCartObservable{
 		}
 		return credit;
 	}
+	public int getNonEssentialCredit() {
+		int credit = 0;
+		
+		return credit;
+	}
 }

@@ -28,6 +28,9 @@ public class CourseData {
 			instance = new CourseData();
 		return instance;
 	}
+	public ArrayList<Course> getAllData() {
+		return (ArrayList<Course>) data.clone();
+	}
 	public ArrayList<Course> getData() {
 		return workingData;
 	}
