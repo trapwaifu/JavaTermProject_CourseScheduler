@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,12 +65,13 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 				if(gbc.gridx != 0) {
 					JTextArea prev = new JTextArea(course.courseName + " " + course.division + " " + course.professor);
 					prev.setColumns(5);
-					prev.setOpaque(false);
+					prev.setOpaque(true);
 					prev.setLineWrap(true);
+					prev.setBackground(Color.yellow);
 					JScrollPane areaScrollPane = new JScrollPane(prev);
 					labelList.add(areaScrollPane);
 
-					panel.add(areaScrollPane, gbc, 2);
+					panel.add(areaScrollPane, gbc, 5);
 				}
 				// initialize current
 				gbc.gridheight = 1;
@@ -85,11 +87,13 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 			JTextArea prev = new JTextArea(course.courseName + " " + course.division + " " + course.professor);
 			prev.setColumns(5);
 			prev.setLineWrap(true);
-			prev.setOpaque(false);
+			prev.setOpaque(true);
+			prev.setBackground(Color.yellow);
+
 			JScrollPane areaScrollPane = new JScrollPane(prev);
 			labelList.add(areaScrollPane);
 
-			panel.add(areaScrollPane, gbc, 2);
+			panel.add(areaScrollPane, gbc, 5);
 		}
 
 		labelMap.put(course, labelList);

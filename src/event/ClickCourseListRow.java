@@ -35,6 +35,13 @@ public class ClickCourseListRow extends MouseAdapter{
 
 	@Override
 	public void mouseClicked(MouseEvent event) {
+		execute(event);
+	}
+	@Override
+	public void mousePressed(MouseEvent event) {
+		execute(event);
+	}
+	void execute(MouseEvent event) {
 		JTable table = (JTable) event.getSource();
 		int row = table.getSelectedRow();
 
@@ -60,7 +67,6 @@ public class ClickCourseListRow extends MouseAdapter{
 		// update view
 		panel.revalidate();
 		panel.repaint();
-
 	}
 	void draw(Course course, boolean isSelectedCourse) {
 		if(course.time.length == 0) return;
@@ -90,13 +96,16 @@ public class ClickCourseListRow extends MouseAdapter{
 				if(gbc.gridx != 0) {
 					JPanel outlinePanel = new JPanel();
 					outlinePanel.setOpaque(false);
-					if(isSelectedCourse)
-						outlinePanel.setBorder(BorderFactory.createLineBorder(Color.RED, 6));
-					else
-						outlinePanel.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
-
 					panelList.add(outlinePanel);
-					panel.add(outlinePanel, gbc, 0);
+					
+					if(isSelectedCourse) {
+						outlinePanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 6));
+						panel.add(outlinePanel, gbc, 3);
+					}
+					else {
+						outlinePanel.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+						panel.add(outlinePanel, gbc, 4);
+					}
 				}
 				// initialize current
 				gbc.gridheight = 1;
@@ -112,12 +121,15 @@ public class ClickCourseListRow extends MouseAdapter{
 			JPanel outlinePanel = new JPanel();
 			outlinePanel.setOpaque(false);
 			panelList.add(outlinePanel);
-			if(isSelectedCourse)
-				outlinePanel.setBorder(BorderFactory.createLineBorder(Color.RED, 6));
-			else
-				outlinePanel.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+			if(isSelectedCourse) {
+				outlinePanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 6));
+				panel.add(outlinePanel, gbc, 3);
+			}
+			else {
+				outlinePanel.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+				panel.add(outlinePanel, gbc, 4);
+			}
 
-			panel.add(outlinePanel, gbc, 0);
 		}
 	}
 }
