@@ -64,7 +64,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 				if(gbc.gridx != 0) {
 					JTextArea prev = new JTextArea(course.courseName + " " + course.division + " " + course.professor);
 					prev.setColumns(5);
-					prev.setOpaque(true);
+					prev.setOpaque(false);
 					prev.setLineWrap(true);
 					JScrollPane areaScrollPane = new JScrollPane(prev);
 					labelList.add(areaScrollPane);
@@ -85,7 +85,7 @@ public class ViewCourseImageGUI implements View, CourseCartObserver {
 			JTextArea prev = new JTextArea(course.courseName + " " + course.division + " " + course.professor);
 			prev.setColumns(5);
 			prev.setLineWrap(true);
-			prev.setOpaque(true);
+			prev.setOpaque(false);
 			JScrollPane areaScrollPane = new JScrollPane(prev);
 			labelList.add(areaScrollPane);
 

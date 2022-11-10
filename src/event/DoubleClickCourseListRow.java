@@ -12,10 +12,8 @@ import course.CourseData;
 import view.View;
 
 public class DoubleClickCourseListRow extends MouseAdapter{
-	private View viewCourseList;
 	private View viewCourseCart;
-	public DoubleClickCourseListRow(View view1, View view2) {
-		this.viewCourseList = view1;
+	public DoubleClickCourseListRow(View view2) {
 		this.viewCourseCart = view2;
 	}
 	@Override
@@ -27,7 +25,6 @@ public class DoubleClickCourseListRow extends MouseAdapter{
 			Course selected = CourseData.getInstance().getData().get(row); 
 			CourseCart.getInstance().add(selected);
 //			JOptionPane.showMessageDialog(table, selected);
-			viewCourseList.view();
 			viewCourseCart.view();
 		}
 	}

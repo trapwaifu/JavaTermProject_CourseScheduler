@@ -20,6 +20,7 @@ import cart.CourseCart;
 import course.CourseData;
 import event.ClickAddToCartButton;
 import event.ClickCourseListHeader;
+import event.ClickCourseListRow;
 import event.ClickRemoveCourseButton;
 import event.ClickResetButton;
 import event.ClickSaveImage;
@@ -196,10 +197,9 @@ public class Main extends JFrame {
 		removeCourseButton.addActionListener(new ClickRemoveCourseButton(courseCart, viewCourseCart));
 		saveImageButton.addActionListener(new ClickSaveImage(panel));
 		
-		
 		JTableHeader courseListHeader = courseList.getTableHeader();
 		courseListHeader.addMouseListener(new ClickCourseListHeader(courseList, viewCourseList));
-		courseList.addMouseListener(new DoubleClickCourseListRow(viewCourseList, viewCourseCart));
+		courseList.addMouseListener(new DoubleClickCourseListRow(viewCourseCart));
 		
 		JTableHeader courseCartHeader = courseCart.getTableHeader();
 		courseCartHeader.addMouseListener(new ClickCourseListHeader(courseCart, viewCourseCart));
@@ -213,6 +213,8 @@ public class Main extends JFrame {
 		
 		viewCourseImage = new ViewCourseImageGUI(panel, gbc, contentLocationInfo);
 		CourseCart.getInstance().addObserver(viewCourseImage);
+		
+		courseList.addMouseListener(new ClickCourseListRow(panel, gbc, contentLocationInfo));
 		
 		viewCourseList.view();
 		viewCourseCart.view();
