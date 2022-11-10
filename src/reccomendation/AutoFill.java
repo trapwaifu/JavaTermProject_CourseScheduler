@@ -69,7 +69,7 @@ public class AutoFill {
 		for(int i = index; i != endIndex; i = (i + 1) % data.size()) {
 			candidate.add(data.get(i));
 			
-			if(dfs(data, original, remainingCredits - data.get(i).credit, index + 1, endIndex)) return true;
+			if(dfs(data, original, remainingCredits - data.get(i).credit, (i + 1) % data.size(), endIndex)) return true;
 			
 			candidate.remove(candidate.size() - 1);
 		}
