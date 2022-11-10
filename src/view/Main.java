@@ -22,6 +22,7 @@ import event.ClickAddToCartButton;
 import event.ClickCourseListHeader;
 import event.ClickRemoveCourseButton;
 import event.ClickResetButton;
+import event.ClickSaveImage;
 import event.ClickSearchButton;
 import event.ComboBoxSelection;
 import event.DoubleClickCourseCartRow;
@@ -193,6 +194,8 @@ public class Main extends JFrame {
 		resetButton.addActionListener(new ClickResetButton(viewCourseCart));
 		addToCartButton.addActionListener(new ClickAddToCartButton(courseList, viewCourseCart));
 		removeCourseButton.addActionListener(new ClickRemoveCourseButton(courseCart, viewCourseCart));
+		saveImageButton.addActionListener(new ClickSaveImage(panel));
+		
 		
 		JTableHeader courseListHeader = courseList.getTableHeader();
 		courseListHeader.addMouseListener(new ClickCourseListHeader(courseList, viewCourseList));
