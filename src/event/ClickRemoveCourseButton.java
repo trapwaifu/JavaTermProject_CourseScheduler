@@ -11,30 +11,28 @@ import course.Course;
 import course.CourseData;
 import view.View;
 
-public class ClickAddToCartButton implements ActionListener {
+public class ClickRemoveCourseButton implements ActionListener {
 	JTable courseList;
-	View courseCartView;
-	
-	public ClickAddToCartButton(JTable courseList, View courseCartView) {
+	View view;
+		
+	public ClickRemoveCourseButton(JTable courseList, View view) {
 		super();
 		this.courseList = courseList;
-		this.courseCartView = courseCartView;
+		this.view = view;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int row = courseList.getSelectedRow();
-		
-		
 		if(row == -1) {
-			JOptionPane.showMessageDialog(null, "Select a course!");
+			JOptionPane.showMessageDialog(courseList, "과목을 선택하세요");
 			return;
 		}
-		 
-		Course selected = CourseData.getInstance().getData().get(row); 
-		CourseCart.getInstance().add(selected);
 		
-		courseCartView.view();
-	}
+		Course selected = CourseCart.getInstance().getCart().get(row); 
+		CourseCart.getInstance().remove(row);
 
+		
+		view.view();
+	}
 }

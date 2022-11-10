@@ -20,6 +20,7 @@ import cart.CourseCart;
 import course.CourseData;
 import event.ClickAddToCartButton;
 import event.ClickCourseListHeader;
+import event.ClickRemoveCourseButton;
 import event.ClickResetButton;
 import event.ClickSearchButton;
 import event.ComboBoxSelection;
@@ -183,18 +184,6 @@ public class Main extends JFrame {
 			panel.add(areaScrollPane, gbc);		
 		}
 		
-		// Test
-//		gbc.gridx = 3;
-//		gbc.gridy = 3;
-//		gbc.gridheight = 3;
-//		gbc.gridwidth = 1;
-//		JLabel testUnit = new JLabel("Test Unit");
-//		testUnit.setOpaque(true);
-//		panel.add(testUnit, gbc, 2);
-		//panel.remove(testUnit);
-		
-		
-		
 		setVisible(true);
 
 		
@@ -202,11 +191,12 @@ public class Main extends JFrame {
 		viewCourseCart = new ViewCourseCartGUI(courseCart);
 		
 		resetButton.addActionListener(new ClickResetButton(viewCourseCart));
-
+		addToCartButton.addActionListener(new ClickAddToCartButton(courseList, viewCourseCart));
+		removeCourseButton.addActionListener(new ClickRemoveCourseButton(courseCart, viewCourseCart));
+		
 		JTableHeader courseListHeader = courseList.getTableHeader();
 		courseListHeader.addMouseListener(new ClickCourseListHeader(courseList, viewCourseList));
 		courseList.addMouseListener(new DoubleClickCourseListRow(viewCourseList, viewCourseCart));
-		addToCartButton.addActionListener(new ClickAddToCartButton(courseList, viewCourseCart));
 		
 		JTableHeader courseCartHeader = courseCart.getTableHeader();
 		courseCartHeader.addMouseListener(new ClickCourseListHeader(courseCart, viewCourseCart));
