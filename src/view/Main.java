@@ -200,17 +200,19 @@ public class Main extends JFrame {
 		viewCourseCart = new ViewCourseCartGUI(courseCart);
 		
 		resetButton.addActionListener(new ClickResetButton(viewCourseCart));
-		addToCartButton.addActionListener(new ClickAddToCartButton(courseList, viewCourseCart));
+		ClickAddToCartButton clickAddToCartButton = new ClickAddToCartButton(courseList, viewCourseCart);
 		removeCourseButton.addActionListener(new ClickRemoveCourseButton(courseCart, viewCourseCart));
 		saveImageButton.addActionListener(new ClickSaveImage(panel));
 		
 		JTableHeader courseListHeader = courseList.getTableHeader();
 		courseListHeader.addMouseListener(new ClickCourseListHeader(courseList, viewCourseList));
+		
 		courseList.addMouseListener(new DoubleClickCourseListRow(viewCourseCart));
 		
 		JTableHeader courseCartHeader = courseCart.getTableHeader();
 		courseCartHeader.addMouseListener(new ClickCourseListHeader(courseCart, viewCourseCart));
-		courseCart.addMouseListener(new DoubleClickCourseCartRow(viewCourseCart));
+		
+		DoubleClickCourseCartRow doubleClickCourseCartRow = new DoubleClickCourseCartRow(viewCourseCart);
 		
 		selectDepartmentCombobox.addItemListener(new ComboBoxSelection(viewCourseList));
 		
@@ -221,7 +223,8 @@ public class Main extends JFrame {
 		viewCourseImage = new ViewCourseImageGUI(panel, gbc, contentLocationInfo);
 		CourseCart.getInstance().addObserver(viewCourseImage);
 		
-		courseList.addMouseListener(new ClickCourseListRow(panel, gbc, contentLocationInfo));
+		ClickCourseListRow clickCourseListRow = new ClickCourseListRow(panel, gbc, contentLocationInfo); 
+		
 		
 		JLabel appNameLabel = new JLabel("한?표 : 2017120107 장용연");
 		appNameLabel.setBounds(212, 16, 251, 16);
@@ -239,8 +242,17 @@ public class Main extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ClickAutoFill clickAutoFill = new ClickAutoFill(viewCourseCart);
+		recommendCourseButton.addActionListener(clickAutoFill);
 		
-		recommendCourseButton.addActionListener(new ClickAutoFill(viewCourseCart));
+		doubleClickCourseCartRow.addObserver(clickCourseListRow);
+		clickAutoFill.addObserver(clickCourseListRow);
+		clickAddToCartButton.addObserver(clickCourseListRow);
+		
+		addToCartButton.addActionListener(clickAddToCartButton);
+		courseList.addMouseListener(clickCourseListRow);
+		courseCart.addMouseListener(doubleClickCourseCartRow);
+
 		
 		viewCourseList.view();
 		viewCourseCart.view();

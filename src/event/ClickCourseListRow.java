@@ -16,15 +16,22 @@ import javax.swing.JTable;
 
 import course.Course;
 import course.CourseData;
+import observerinterface.GeneralObservable;
+import observerinterface.GeneralObserver;
 import view.GridLocationInfo;
 
-public class ClickCourseListRow extends MouseAdapter{
+public class ClickCourseListRow extends MouseAdapter implements GeneralObserver{
 	JLayeredPane panel;
 	GridBagConstraints gbc;
 	Map<Integer, GridLocationInfo> contentLocationInfo;
 
 	ArrayList<JPanel> panelList = new ArrayList<>();
 
+	@Override
+	public void update() {
+		deletePrevious();
+	}
+	
 	public ClickCourseListRow(JLayeredPane panel, GridBagConstraints gbc,
 			Map<Integer, GridLocationInfo> contentLocationInfo) {
 		super();
@@ -33,6 +40,7 @@ public class ClickCourseListRow extends MouseAdapter{
 		this.contentLocationInfo = contentLocationInfo;
 	}
 
+	
 	@Override
 	public void mouseClicked(MouseEvent event) {
 		execute(event);
@@ -40,6 +48,14 @@ public class ClickCourseListRow extends MouseAdapter{
 	@Override
 	public void mousePressed(MouseEvent event) {
 		execute(event);
+	}
+	void deletePrevious() {
+		// delete previous panels
+		System.out.println("removing red and blue outlines");
+		for(var pn : panelList) {
+			panel.remove(pn);
+		}
+		panelList.clear();
 	}
 	void execute(MouseEvent event) {
 		JTable table = (JTable) event.getSource();
@@ -52,10 +68,8 @@ public class ClickCourseListRow extends MouseAdapter{
 				.contains(course.courseName.toLowerCase()))
 				.collect(Collectors.toCollection(ArrayList::new));
 		
-		// delete previous panels
-		for(var pn : panelList) {
-			panel.remove(pn);
-		}
+		deletePrevious();
+		
 		// draw panel for selected course
 		draw(course, true);
 		
