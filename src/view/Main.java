@@ -2,14 +2,20 @@ package view;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -58,7 +64,7 @@ public class Main extends JFrame {
 		courseList.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //		getContentPane().add(courseList);
 		JScrollPane courseListScrollPane = new JScrollPane();
-		courseListScrollPane.setBounds(10, 80, 651, 347);
+		courseListScrollPane.setBounds(10, 131, 651, 296);
 		courseListScrollPane.setViewportView(courseList);
 		getContentPane().add(courseListScrollPane);
 		
@@ -73,15 +79,15 @@ public class Main extends JFrame {
 		getContentPane().add(courseCartPane);
 		
 		JButton searchButton = new JButton("검색");
-		searchButton.setBounds(197, 39, 117, 29);
+		searchButton.setBounds(203, 86, 117, 29);
 		getContentPane().add(searchButton);
 		
 		JButton addToCartButton = new JButton("과목 담기");
-		addToCartButton.setBounds(463, 39, 117, 29);
+		addToCartButton.setBounds(472, 86, 117, 29);
 		getContentPane().add(addToCartButton);
 		
 		JComboBox selectDepartmentCombobox = new JComboBox();
-		selectDepartmentCombobox.setBounds(349, 40, 104, 27);
+		selectDepartmentCombobox.setBounds(343, 87, 104, 27);
 		String[] departmentList = {"개설학과", "컴퓨터공학부", "HRD학과", "교양학부", "기계공학부", "메카트로닉스공학부","에너지신소재화학공학부", 
 				"전기ㆍ전자ㆍ통신공학부", "산업경영학부", "메카트로닉스공학부", "디자인ㆍ건축공학부", "융합학과"};
 //		String[] departmentList = {"개설학과", "컴공", "디공,건축", "기계", "전전통", "에신화", "산경", "메카", "교양학부", "HRD학과", "융합"};
@@ -89,7 +95,7 @@ public class Main extends JFrame {
 		getContentPane().add(selectDepartmentCombobox);
 		
 		searchQueueTextfield = new JTextField();
-		searchQueueTextfield.setBounds(32, 39, 155, 26);
+		searchQueueTextfield.setBounds(36, 86, 155, 26);
 		getContentPane().add(searchQueueTextfield);
 		searchQueueTextfield.setColumns(10);
 		
@@ -216,6 +222,23 @@ public class Main extends JFrame {
 		CourseCart.getInstance().addObserver(viewCourseImage);
 		
 		courseList.addMouseListener(new ClickCourseListRow(panel, gbc, contentLocationInfo));
+		
+		JLabel appNameLabel = new JLabel("한?표 : 2017120107 장용연");
+		appNameLabel.setBounds(212, 16, 251, 16);
+		getContentPane().add(appNameLabel);
+		
+		JPanel logoPanel = new JPanel();
+		logoPanel.setBounds(30, 11, 161, 65);
+		getContentPane().add(logoPanel);
+		BufferedImage myPicture;
+		try {
+			myPicture = ImageIO.read(new File("data/logo.png"));
+			JLabel logoLabel = new JLabel(new ImageIcon(myPicture));
+			logoPanel.add(logoLabel);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		recommendCourseButton.addActionListener(new ClickAutoFill(viewCourseCart));
 		
