@@ -45,7 +45,7 @@ public class CourseData {
 	}
 	private void readData() throws Exception {
 		data = new ArrayList<Course>();
-		File file = new File("src/course/data.txt");
+		File file = new File("data/data.txt");
 		Scanner sc = new Scanner(file);
 		while(sc.hasNextLine()) {
 			String line = sc.nextLine();
