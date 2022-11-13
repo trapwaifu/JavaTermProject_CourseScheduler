@@ -1,6 +1,7 @@
 package reccomendation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -45,6 +46,7 @@ public class AutoFill {
 		
 		int start = rand.nextInt(data.size());
 		int end = start == 0 ? data.size() - 1 : start - 1;
+		Collections.shuffle(data);
 		dfs(data, original, creditToReplace, start, end);
 		
 		// add to cart
