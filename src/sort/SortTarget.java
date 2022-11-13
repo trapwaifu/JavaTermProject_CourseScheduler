@@ -5,18 +5,20 @@ import java.util.Comparator;
 import course.Course;
 import course.CourseData;
 
-public class SortCourseName implements Sort {
+public class SortTarget implements Sort{
+
 	@Override
 	public void sort() {
 		var data = CourseData.getInstance().getData();
 		
+		// determine whether the data is sorted already
 		var copy = data.clone();
-
+		
 		data.sort(
 				new Comparator<Course>() {
 					@Override
 					public int compare(Course c1, Course c2) {
-						return c1.courseName.compareTo(c2.courseName);
+						return c1.target.compareTo(c2.target);
 					}
 				});
 		
@@ -25,9 +27,8 @@ public class SortCourseName implements Sort {
 					new Comparator<Course>() {
 						@Override
 						public int compare(Course c1, Course c2) {
-							return c2.courseName.compareTo(c1.courseName);
+							return c2.target.compareTo(c1.target);
 						}
 					});
-
 	}
 }

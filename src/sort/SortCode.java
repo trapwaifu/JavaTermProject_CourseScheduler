@@ -10,7 +10,7 @@ public class SortCode implements Sort {
 	public void sort() {
 		var data = CourseData.getInstance().getData();
 		
-		// TODO : add listeners to determine whether the data is sorted already
+		// determine whether the data is sorted already
 		var copy = data.clone();
 		
 		data.sort(

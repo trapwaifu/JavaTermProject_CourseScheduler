@@ -8,8 +8,8 @@ public class Course {
 	public final String division;
 	public final String target;
 	public final String misc;
-	public final int credit;
-	public final int designCredit;
+	public final Integer credit;
+	public final Integer designCredit;
 	public final String department;
 	public final String professor;
 	public final String max_students;

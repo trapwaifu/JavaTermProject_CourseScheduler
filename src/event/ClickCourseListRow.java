@@ -56,7 +56,6 @@ public class ClickCourseListRow extends MouseAdapter implements GeneralObserver{
 	}
 	void deletePrevious() {
 		// delete previous panels
-		System.out.println("removing red and blue outlines");
 		for(var pn : panelList) {
 			panel.remove(pn);
 		}
