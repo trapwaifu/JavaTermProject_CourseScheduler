@@ -43,7 +43,12 @@ public class ClickCourseListRow extends MouseAdapter implements GeneralObserver{
 	
 	@Override
 	public void mouseClicked(MouseEvent event) {
-		execute(event);
+		if(event.getClickCount() == 1) {
+			execute(event);
+		}
+		else if(event.getClickCount() == 2) {
+			deletePrevious();
+		}
 	}
 	@Override
 	public void mousePressed(MouseEvent event) {

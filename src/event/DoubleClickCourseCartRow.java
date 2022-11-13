@@ -14,6 +14,7 @@ import view.View;
 
 public class DoubleClickCourseCartRow extends MouseAdapter implements GeneralObservable{
 	private View viewCourseCart;
+
 	public DoubleClickCourseCartRow(View view) {
 		this.viewCourseCart = view;
 	}
@@ -30,6 +31,7 @@ public class DoubleClickCourseCartRow extends MouseAdapter implements GeneralObs
 			viewCourseCart.view();
 			
 		}
+		
 	}
 	
 	ArrayList<GeneralObserver> observers = new ArrayList<>();
