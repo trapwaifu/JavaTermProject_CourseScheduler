@@ -264,26 +264,6 @@ public class Main extends JFrame {
 	}
 	
 	private void actionTest() {
-		Filter filter = new FilterDepartment();
-		Search search = new Search();
-		Sort sort = new SortCourseName();
-		filter.filter("컴퓨터공학부");
-		search.search("프로그래밍");
-		sort.sort();
-		viewCourseList.view();
 		
-		CourseData cd = CourseData.getInstance();
-		CourseCart cc = CourseCart.getInstance();
-		cc.add(cd.getCourse(4));
-		cc.add(cd.getCourse(5));
-		viewCourseCart.view();
-		
-		filter.filter("교양학부");
-		sort.sort();
-		
-		for(int i = 0; i < 60; ++i) {
-			cc.add(cd.getCourse(i));
-		}
-		viewCourseCart.view();
 	}
 }
