@@ -52,9 +52,22 @@ public class Main extends JFrame {
 	private ViewCourseImageGUI viewCourseImage = null;
 	
 	Main() {
-		setTitle("Test");
+		setTitle("한?표");
 		setSize(1200, 749);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		JPanel logoPanel = new JPanel();
+		logoPanel.setBounds(30, 11, 161, 65);
+		getContentPane().add(logoPanel);
+		BufferedImage myPicture;
+		try {
+			myPicture = ImageIO.read(new File("data/logo.png"));
+			JLabel logoLabel = new JLabel(new ImageIcon(myPicture));
+			logoPanel.add(logoLabel);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Container contentPane = getContentPane();
 		contentPane.setLayout(null);
@@ -230,18 +243,7 @@ public class Main extends JFrame {
 		appNameLabel.setBounds(212, 16, 251, 16);
 		getContentPane().add(appNameLabel);
 		
-		JPanel logoPanel = new JPanel();
-		logoPanel.setBounds(30, 11, 161, 65);
-		getContentPane().add(logoPanel);
-		BufferedImage myPicture;
-		try {
-			myPicture = ImageIO.read(new File("data/logo.png"));
-			JLabel logoLabel = new JLabel(new ImageIcon(myPicture));
-			logoPanel.add(logoLabel);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		ClickAutoFill clickAutoFill = new ClickAutoFill(viewCourseCart);
 		recommendCourseButton.addActionListener(clickAutoFill);
 		
