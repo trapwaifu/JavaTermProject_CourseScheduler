@@ -58,8 +58,8 @@ public class AutoFill {
 			}		
 		}
 		else {
+			CourseCart.getInstance().reset();
 			for(var course : original) {
-				CourseCart.getInstance().reset();
 				CourseCart.getInstance().add(course);
 			}
 		}
