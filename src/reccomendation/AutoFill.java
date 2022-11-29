@@ -52,9 +52,17 @@ public class AutoFill {
 		// add to cart
 		
 //		int pick = rand.nextInt(cache.size());
-		for(var course : candidate) {
-			CourseCart.getInstance().add(course);
-		}		
+		if(candidate.size() > 0) {
+			for(var course : candidate) {
+				CourseCart.getInstance().add(course);
+			}		
+		}
+		else {
+			CourseCart.getInstance().reset();
+			for(var course : original) {
+				CourseCart.getInstance().add(course);
+			}
+		}
 	}
 	
 	private boolean dfs(ArrayList<Course> data, ArrayList<Course> original,

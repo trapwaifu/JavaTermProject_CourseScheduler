@@ -68,8 +68,8 @@ public class ClickCourseListRow extends MouseAdapter implements GeneralObserver{
 		Course course = CourseData.getInstance().getCourse(row);
 		var data = CourseData.getInstance().getData();
 		ArrayList<Course> identicalCourses
-			= data.stream().filter(p -> p.courseName.toLowerCase()
-				.contains(course.courseName.toLowerCase()))
+			= data.stream().filter(p -> p.code.toLowerCase()
+				.contains(course.code.toLowerCase()))
 				.collect(Collectors.toCollection(ArrayList::new));
 		
 		deletePrevious();
