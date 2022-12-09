@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import observerinterface.GeneralObservable;
 import observerinterface.GeneralObserver;
-import reccomendation.AutoFill;
+import recomnmendation.AutoFill;
 import view.View;
 
 public class ClickAutoFill implements ActionListener, GeneralObservable {

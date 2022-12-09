@@ -1,4 +1,4 @@
-package reccomendation;
+package recomnmendation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,11 +53,6 @@ public class AutoFill {
 				CourseCart.getInstance().add(course);
 			}		
 		}
-//		else {
-//			for(var course : original) {
-//				CourseCart.getInstance().add(course);
-//			}
-//		}
 	}
 	
 	private boolean dfs(ArrayList<Course> data, ArrayList<Course> candidate, int remainingCredits, int index) {
