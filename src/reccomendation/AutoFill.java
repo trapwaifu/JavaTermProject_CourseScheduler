@@ -17,7 +17,6 @@ public class AutoFill {
 	
 //	String hash;
 //	ArrayList<ArrayList<Course>> cache = new ArrayList<>();
-	ArrayList<Course> candidate = null;
 	public void autoFill() {
 		int creditToReplace = 0;
 		
@@ -29,57 +28,52 @@ public class AutoFill {
 				creditToReplace += course.credit;
 		}
 		
-		var data = original.stream().filter(p -> !(p.department.equals("HRD학과") || p.department.equals("교양학부")))
+		var coursesToKeep = original.stream().filter(p -> !(p.department.equals("HRD학과") || p.department.equals("교양학부")))
 				.collect(Collectors.toCollection(ArrayList::new));
-		CourseCart.getInstance().reset();
-		for(var course : data)
-			CourseCart.getInstance().add(course);
 		
 		// perform dfs and find all possible candidates
 		// if we can use the cached result, use it
-		data = CourseData.getInstance().getAllData();
+		var data = CourseData.getInstance().getAllData();
 		data = data.stream().filter(p -> (p.department.equals("HRD학과") || p.department.equals("교양학부")))
 				.collect(Collectors.toCollection(ArrayList::new));
 		
-		candidate = new ArrayList<Course>();
+		ArrayList<Course> candidate = new ArrayList<Course>();
+		for(var course : coursesToKeep) candidate.add(course);
+		
 		Random rand = new Random();
 		
-		int start = rand.nextInt(data.size());
-		int end = start == 0 ? data.size() - 1 : start - 1;
 		Collections.shuffle(data);
-		dfs(data, original, creditToReplace, start, end);
+		dfs(data, candidate, creditToReplace, 0);
 		
 		// add to cart
 		
-//		int pick = rand.nextInt(cache.size());
-		if(candidate.size() > 0) {
+		if(candidate.size() > coursesToKeep.size()) {
+			CourseCart.getInstance().reset();
 			for(var course : candidate) {
 				CourseCart.getInstance().add(course);
 			}		
 		}
-		else {
-			CourseCart.getInstance().reset();
-			for(var course : original) {
-				CourseCart.getInstance().add(course);
-			}
-		}
+//		else {
+//			for(var course : original) {
+//				CourseCart.getInstance().add(course);
+//			}
+//		}
 	}
 	
-	private boolean dfs(ArrayList<Course> data, ArrayList<Course> original,
-			int remainingCredits, int index, int endIndex) {
+	private boolean dfs(ArrayList<Course> data, ArrayList<Course> candidate, int remainingCredits, int index) {
 		
 		if(index >= data.size() || remainingCredits < 0 
-				|| notPossibleComination(candidate, original)) { 
+				|| notPossibleComination(candidate)) { 
 			return false;
 		}
 		if(remainingCredits == 0) {
 			return true;
 		}
 		
-		for(int i = index; i != endIndex; i = (i + 1) % data.size()) {
+		for(int i = index; i < data.size(); ++i) {
 			candidate.add(data.get(i));
 			
-			if(dfs(data, original, remainingCredits - data.get(i).credit, (i + 1) % data.size(), endIndex)) return true;
+			if(dfs(data, candidate, remainingCredits - data.get(i).credit, i+1)) return true;
 			
 			candidate.remove(candidate.size() - 1);
 		}
@@ -87,7 +81,7 @@ public class AutoFill {
 	}
 	// Could be more efficient by checking only the last element that was added
 	// and keeping track of the distinct names and class times
-	private boolean notPossibleComination(ArrayList<Course> current, ArrayList<Course> original) {
+	private boolean notPossibleComination(ArrayList<Course> current) {
 		Set<String> distinctCourseNames = new HashSet<>();
 		Set<Integer> distinctClassTimes = new HashSet<>();
 		
@@ -102,33 +96,7 @@ public class AutoFill {
 				distinctClassTimes.add(time);
 			}
 		}	
-		for(var course : original) {
-			if(distinctCourseNames.contains(course.courseName))
-				return true;
-			distinctCourseNames.add(course.courseName);
-			
-			for(var time : course.time) {
-				if(distinctClassTimes.contains(time))
-					return true;
-				distinctClassTimes.add(time);
-			}
-		}
 		
 		return false;
-	}
-	private void clearCart() {
-		;
-	}
-	private int getRefinementHRDCredit() {
-		return 0;
-	}
-	private void find_candidate() {
-		;
-	}
-	private void hash_courses() {
-		;
-	}
-	public void init() {
-		
 	}
 }
