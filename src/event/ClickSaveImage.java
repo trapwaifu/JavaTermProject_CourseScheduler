@@ -36,11 +36,12 @@ public class ClickSaveImage implements ActionListener {
 			if(!path.endsWith(".png"))
 				path = path + ".png";
 
+			System.out.println(path);
 			try {
 				BufferedImage im = new BufferedImage(
 						pane.getWidth(), pane.getHeight(), BufferedImage.TYPE_INT_ARGB);
 				pane.paint(im.getGraphics());
-				ImageIO.write(im, "PNG", new File("shot.png"));
+				ImageIO.write(im, "PNG", new File(path));
 
 			} 
 			catch (IOException e1) {
