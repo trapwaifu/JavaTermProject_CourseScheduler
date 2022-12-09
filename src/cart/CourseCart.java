@@ -54,12 +54,12 @@ public class CourseCart implements CourseCartObservable{
 				return false;
 			}
 		}
-		for(var bookedCourses : cart) {
-			if(bookedCourses.code.equals(c.code)) {
-				JOptionPane.showMessageDialog(null, "이미 수강한 과목");
-				return false;
-			}
-		}
+//		for(var bookedCourses : cart) {
+//			if(bookedCourses.code.equals(c.code)) {
+//				JOptionPane.showMessageDialog(null, "이미 수강한 과목");
+//				return false;
+//			}
+//		}
 		
 		for(var time : c.time) {
 			bookedTime.put(time, true);
